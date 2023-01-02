@@ -1,0 +1,225 @@
+
+controller.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000104  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000002  00800060  00000104  00000178  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  0000017a  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000001ac  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 000000c8  00000000  00000000  000001e8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000edd  00000000  00000000  000002b0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000008d0  00000000  00000000  0000118d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000782  00000000  00000000  00001a5d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  0000015c  00000000  00000000  000021e0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000006e6  00000000  00000000  0000233c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000624  00000000  00000000  00002a22  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000088  00000000  00000000  00003046  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   8:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  10:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  14:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  18:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  1c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  20:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  24:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  28:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  2c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  30:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  34:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  38:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  3c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  40:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  44:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  48:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  4c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  50:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e4 e0       	ldi	r30, 0x04	; 4
+  68:	f1 e0       	ldi	r31, 0x01	; 1
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a2 36       	cpi	r26, 0x62	; 98
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+  76:	0e 94 41 00 	call	0x82	; 0x82 <main>
+  7a:	0c 94 80 00 	jmp	0x100	; 0x100 <_exit>
+
+0000007e <__bad_interrupt>:
+  7e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000082 <main>:
+*/	 
+
+DIO_PortCFG InputPort = {DIO_PORTD,PORT_INPUT};
+int main(void)
+{	
+	DIO_INIT_PORT(InputPort);
+  82:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+  86:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+  8a:	0e 94 67 00 	call	0xce	; 0xce <DIO_INIT_PORT>
+	SPI_MasterInit();
+  8e:	0e 94 77 00 	call	0xee	; 0xee <SPI_MasterInit>
+	char movement;
+	while(1)
+	{	
+	movement = DIOReadPort(DIO_PORTD);
+  92:	83 e0       	ldi	r24, 0x03	; 3
+  94:	0e 94 55 00 	call	0xaa	; 0xaa <DIOReadPort>
+	SPI_MasterTransmit(movement);
+  98:	0e 94 7c 00 	call	0xf8	; 0xf8 <SPI_MasterTransmit>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  9c:	8f e3       	ldi	r24, 0x3F	; 63
+  9e:	9f e1       	ldi	r25, 0x1F	; 31
+  a0:	01 97       	sbiw	r24, 0x01	; 1
+  a2:	f1 f7       	brne	.-4      	; 0xa0 <main+0x1e>
+  a4:	00 c0       	rjmp	.+0      	; 0xa6 <main+0x24>
+  a6:	00 00       	nop
+  a8:	f4 cf       	rjmp	.-24     	; 0x92 <main+0x10>
+
+000000aa <DIOReadPort>:
+		
+	}
+}
+
+uint8 DIOReadPort(DIO_PORT PORT){
+	switch (PORT){
+  aa:	81 30       	cpi	r24, 0x01	; 1
+  ac:	41 f0       	breq	.+16     	; 0xbe <DIOReadPort+0x14>
+  ae:	28 f0       	brcs	.+10     	; 0xba <DIOReadPort+0x10>
+  b0:	82 30       	cpi	r24, 0x02	; 2
+  b2:	39 f0       	breq	.+14     	; 0xc2 <DIOReadPort+0x18>
+  b4:	83 30       	cpi	r24, 0x03	; 3
+  b6:	39 f0       	breq	.+14     	; 0xc6 <DIOReadPort+0x1c>
+  b8:	08 c0       	rjmp	.+16     	; 0xca <DIOReadPort+0x20>
+		case DIO_PORTA:
+			return PINA;
+  ba:	89 b3       	in	r24, 0x19	; 25
+  bc:	08 95       	ret
+		case DIO_PORTB:
+			return PINB;
+  be:	86 b3       	in	r24, 0x16	; 22
+  c0:	08 95       	ret
+		case DIO_PORTC:
+			return PINC;	
+  c2:	83 b3       	in	r24, 0x13	; 19
+  c4:	08 95       	ret
+		case DIO_PORTD:
+			return PIND;
+  c6:	80 b3       	in	r24, 0x10	; 16
+  c8:	08 95       	ret
+		default:
+			return 0x00;
+  ca:	80 e0       	ldi	r24, 0x00	; 0
+	}
+	
+  cc:	08 95       	ret
+
+000000ce <DIO_INIT_PORT>:
+		}
+	}
+}
+
+void DIO_INIT_PORT(DIO_PortCFG portcfg){
+	switch (portcfg.Port){
+  ce:	81 30       	cpi	r24, 0x01	; 1
+  d0:	41 f0       	breq	.+16     	; 0xe2 <DIO_INIT_PORT+0x14>
+  d2:	28 f0       	brcs	.+10     	; 0xde <DIO_INIT_PORT+0x10>
+  d4:	82 30       	cpi	r24, 0x02	; 2
+  d6:	39 f0       	breq	.+14     	; 0xe6 <DIO_INIT_PORT+0x18>
+  d8:	83 30       	cpi	r24, 0x03	; 3
+  da:	39 f0       	breq	.+14     	; 0xea <DIO_INIT_PORT+0x1c>
+  dc:	08 95       	ret
+		case DIO_PORTA:
+			DDRA = portcfg.PortDirection;
+  de:	9a bb       	out	0x1a, r25	; 26
+			break;
+  e0:	08 95       	ret
+		case DIO_PORTB:
+			DDRB = portcfg.PortDirection;
+  e2:	97 bb       	out	0x17, r25	; 23
+			break;
+  e4:	08 95       	ret
+		case DIO_PORTC:
+			DDRC = portcfg.PortDirection;
+  e6:	94 bb       	out	0x14, r25	; 20
+			break;
+  e8:	08 95       	ret
+		case DIO_PORTD:
+			DDRD = portcfg.PortDirection;
+  ea:	91 bb       	out	0x11, r25	; 17
+  ec:	08 95       	ret
+
+000000ee <SPI_MasterInit>:
+}
+
+void SPI_MasterInit(void)
+{
+	/* Set MOSI and SCK output, all others input */
+	DDRB = (1<<PB4)|(1<<PB5)|(1<<PB7);
+  ee:	80 eb       	ldi	r24, 0xB0	; 176
+  f0:	87 bb       	out	0x17, r24	; 23
+	/* Enable SPI, Master, set clock rate fck/16 */
+	SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR0);
+  f2:	81 e5       	ldi	r24, 0x51	; 81
+  f4:	8d b9       	out	0x0d, r24	; 13
+  f6:	08 95       	ret
+
+000000f8 <SPI_MasterTransmit>:
+void SPI_MasterTransmit(char cData)
+{
+	
+	
+	/* Start transmission */
+	SPDR = cData;
+  f8:	8f b9       	out	0x0f, r24	; 15
+	/* Wait for transmission complete */
+	while(!(SPSR & (1<<SPIF)))
+  fa:	77 9b       	sbis	0x0e, 7	; 14
+  fc:	fe cf       	rjmp	.-4      	; 0xfa <SPI_MasterTransmit+0x2>
+	;
+	
+}
+  fe:	08 95       	ret
+
+00000100 <_exit>:
+ 100:	f8 94       	cli
+
+00000102 <__stop_program>:
+ 102:	ff cf       	rjmp	.-2      	; 0x102 <__stop_program>
